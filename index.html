@@ -15,6 +15,7 @@
             --dark: #2d3748;
             --success: #2ec27e;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
         
         * {
@@ -28,6 +29,7 @@
             line-height: 1.6;
             color: #333;
             background-color: #f5f7fa;
+            overflow-x: hidden;
         }
         
         h1, h2, h3, h4 {
@@ -39,6 +41,7 @@
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 15px;
         }
         
         .btn {
@@ -49,7 +52,7 @@
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
         }
@@ -150,7 +153,7 @@
         
         /* Hero Section */
         .hero {
-            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            background: url('media/hero-bg.jpg') no-repeat center center/cover;
             height: 85vh;
             display: flex;
             align-items: center;
@@ -174,6 +177,18 @@
             padding: 2rem;
             background: rgba(26, 95, 180, 0.85);
             border-radius: 8px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .hero-content h2 {
@@ -243,6 +258,11 @@
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
         }
         
         .stats {
@@ -250,10 +270,12 @@
             justify-content: space-around;
             margin-top: 3rem;
             text-align: center;
+            flex-wrap: wrap;
         }
         
         .stat-item {
             padding: 1.5rem;
+            min-width: 200px;
         }
         
         .stat-item .number {
@@ -286,7 +308,7 @@
             padding: 2rem;
             text-align: center;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
         }
         
         .grade-card:hover {
@@ -344,7 +366,7 @@
             color: white;
             padding: 1.5rem;
             transform: translateY(100%);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
         }
         
         .facility-card:hover .facility-overlay {
@@ -373,17 +395,134 @@
             overflow: hidden;
             height: 250px;
             box-shadow: var(--shadow);
+            position: relative;
+            cursor: pointer;
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: var(--transition);
         }
         
         .gallery-item:hover img {
             transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay i {
+            color: white;
+            font-size: 2.5rem;
+        }
+        
+        /* Videos Section */
+        .videos {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .video-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            height: 250px;
+        }
+        
+        .video-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 95, 180, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .video-play:hover {
+            background: var(--primary);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .video-play i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .modal-content img, .modal-content video {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
         }
         
         /* Contact */
@@ -459,7 +598,7 @@
         .footer-links a {
             color: #e2e8f0;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: var(--transition);
         }
         
         .footer-links a:hover {
@@ -481,7 +620,7 @@
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
@@ -505,6 +644,10 @@
             
             .contact-container {
                 flex-direction: column;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
             }
         }
         
@@ -535,11 +678,15 @@
             }
             
             .hero-content h2 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .stats {
                 flex-direction: column;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -567,6 +714,7 @@
                     <li><a href="#academics">Academics</a></li>
                     <li><a href="#facilities">Facilities</a></li>
                     <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#videos">Videos</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -598,7 +746,7 @@
                     <p>Our mission is to empower girls through quality education, fostering leadership skills and preparing them for the challenges of tomorrow.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="ZPHS Nagari (Girls) School Building">
+                    <img src="media/school-building.jpg" alt="ZPHS Nagari (Girls) School Building">
                 </div>
             </div>
             <div class="stats">
@@ -666,28 +814,28 @@
             </div>
             <div class="facility-grid">
                 <div class="facility-card">
-                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="School Library">
+                    <img src="media/library.jpg" alt="School Library">
                     <div class="facility-overlay">
                         <h3>Library</h3>
                         <p>Well-stocked library with over 5,000 books, periodicals, and digital resources.</p>
                     </div>
                 </div>
                 <div class="facility-card">
-                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Science Lab">
+                    <img src="media/science-lab.jpg" alt="Science Lab">
                     <div class="facility-overlay">
                         <h3>Science Labs</h3>
                         <p>Modern laboratories for Physics, Chemistry and Biology with latest equipment.</p>
                     </div>
                 </div>
                 <div class="facility-card">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Computer Lab">
+                    <img src="media/computer-lab.jpg" alt="Computer Lab">
                     <div class="facility-overlay">
                         <h3>Computer Lab</h3>
                         <p>State-of-the-art computer lab with 30 systems and high-speed internet access.</p>
                     </div>
                 </div>
                 <div class="facility-card">
-                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sports Facilities">
+                    <img src="media/sports.jpg" alt="Sports Facilities">
                     <div class="facility-overlay">
                         <h3>Sports Facilities</h3>
                         <p>Indoor and outdoor sports facilities including volleyball, kho-kho, and athletics.</p>
@@ -705,22 +853,69 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Classroom">
+                    <img src="media/classroom.jpg" alt="Classroom">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Annual Day">
+                    <img src="media/annual-day.jpg" alt="Annual Day">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Science Exhibition">
+                    <img src="media/science-exhibition.jpg" alt="Science Exhibition">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Library">
+                    <img src="media/library-interior.jpg" alt="Library">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1561489396-888758390c4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sports Day">
+                    <img src="media/sports-day.jpg" alt="Sports Day">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cultural Event">
+                    <img src="media/cultural-event.jpg" alt="Cultural Event">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="videos">
+        <div class="container">
+            <div class="section-title">
+                <h2>School Videos</h2>
+            </div>
+            <div class="video-grid">
+                <div class="video-item">
+                    <img src="media/video-thumb-1.jpg" alt="Annual Day 2023">
+                    <div class="video-play" data-video="media/annual-day-2023.mp4">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <img src="media/video-thumb-2.jpg" alt="Science Exhibition">
+                    <div class="video-play" data-video="media/science-exhibition.mp4">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <img src="media/video-thumb-3.jpg" alt="Sports Day">
+                    <div class="video-play" data-video="media/sports-day.mp4">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -794,6 +989,7 @@
                         <li><a href="#academics">Academics</a></li>
                         <li><a href="#facilities">Facilities</a></li>
                         <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#videos">Videos</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -822,6 +1018,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal for Gallery and Videos -->
+    <div class="modal" id="mediaModal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content" id="modalContent"></div>
+    </div>
 
     <script>
         // Mobile Menu Toggle
@@ -852,6 +1054,56 @@
             });
         });
         
+        // Modal functionality for gallery
+        const modal = document.getElementById('mediaModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Gallery image click
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                modalContent.innerHTML = `<img src="${imgSrc}" alt="Gallery Image">`;
+                modal.style.display = 'flex';
+            });
+        });
+        
+        // Video play buttons
+        document.querySelectorAll('.video-play').forEach(button => {
+            button.addEventListener('click', function() {
+                const videoSrc = this.getAttribute('data-video');
+                modalContent.innerHTML = `
+                    <video controls autoplay>
+                        <source src="${videoSrc}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                modal.style.display = 'flex';
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            // Stop video when closing modal
+            const video = modalContent.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                // Stop video when closing modal
+                const video = modalContent.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+            }
+        });
+        
         // Animation on scroll
         const observerOptions = {
             root: null,
@@ -867,7 +1119,7 @@
             });
         }, observerOptions);
         
-        document.querySelectorAll('.grade-card, .facility-card, .gallery-item').forEach(el => {
+        document.querySelectorAll('.grade-card, .facility-card, .gallery-item, .video-item').forEach(el => {
             observer.observe(el);
         });
     </script>
